@@ -1,0 +1,22 @@
+<a href="" class="btn btn-primary my-2" data-bs-toggle="modal" data-bs-target="#modal">Modal</a>
+<div class="modal fade" id="modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modalLabel">Modal</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/" method="POST">
+                    <label for="date">Date:</label>
+                    <input class="form-control mb-2" type="date" name="date" id="date" required>
+                    <label for="amount">Amount:</label>
+                    <input class="form-control mb-2" type="number" name="amount" id="amount" required>
+                    <label for="description">Description:</label>
+                    <input class="form-control mb-2" type="text" name="description" id="description" required>
+                    <button type="submit" class="btn btn-primary">Apply</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
