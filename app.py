@@ -19,14 +19,23 @@ class Transaction(Base):
     description = Column(String)
 
 
+class Task(Base):
+    __tablename__ = 'tasks'
+
+    id = Column(Integer, primary_key=True)
+    date = Column(Date)
+    title = Column(String)
+    description = Column(String)
+
+
 engine = create_engine(DATABASE_URL)
 Base.metadata.create_all(engine)
 
 Session = sessionmaker(bind=engine)
 
 
-@app.route('/', methods=['GET', 'POST'])
-def main():
+@app.route('/finances', methods=['GET', 'POST'])
+def finances():
     session = Session()
     if request.method == 'POST':
         date = request.form['date']
@@ -46,7 +55,23 @@ def main():
         data[transaction.date].append([transaction.amount, transaction.description])
         daily[transaction.date] += transaction.amount
     session.close()
-    return render_template('home.html', data=data, daily=daily)
+    return render_template('finances.html', data=data, daily=daily)
+
+
+@app.route('/tasks', methods=['GET', 'POST'])
+def tasks():
+    session = Session()
+    if request.method == 'POST':
+        date = request.form['date']
+        title = request.form['title']
+        description = request.form['description']
+        date = datetime.strptime(date, '%Y-%m-%d')
+        task = Task(date=date, title=title, description=description)
+        session.add(task)
+        session.commit()
+    tasks = session.query(Task).order_by(Task.date.desc()).all()
+    session.close()
+    return render_template('tasks.html', tasks=tasks)
 
 
 if __name__ == '__main__':

@@ -7,11 +7,11 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="/" method="POST">
+                <form action="/tasks" method="POST">
                     <label for="date">Date:</label>
                     <input class="form-control mb-2" type="date" name="date" id="date" required>
-                    <label for="amount">Amount:</label>
-                    <input class="form-control mb-2" type="number" name="amount" id="amount" required>
+                    <label for="title">Title:</label>
+                    <input class="form-control mb-2" type="text" name="title" id="title" required>
                     <label for="description">Description:</label>
                     <input class="form-control mb-2" type="text" name="description" id="description" required>
                     <button type="submit" class="btn btn-primary">Apply</button>

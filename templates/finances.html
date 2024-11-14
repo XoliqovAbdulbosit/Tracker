@@ -8,10 +8,10 @@
 <body>
 <div class="container my-2">
     <h1>Expense Tracker</h1>
-    {% include 'modal.html' %}
+    {% include 'finances_modal.html' %}
     <div class="row">
         {% for key, values in data.items() %}
-            <div class="col-4 col-md-2 my-3">
+            <div class="col-6 col-md-3 my-3">
                 <p class="fs-5 text-primary mb-0">{{ key }}</p>
                 {% for value in values %}
                     {% if value.0 > 0 %}
