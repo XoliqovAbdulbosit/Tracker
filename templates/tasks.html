@@ -16,6 +16,9 @@
                 <p class="fs-4 text-waring mb-0">{{ task.date }}</p>
                 <p class="fs-5 text-primary mb-0">{{ task.title }}</p>
                 <p class="fs-6 text-primary mb-0">{{ task.description }}</p>
+                <form action="/tasks/delete/{{ task.id }}" method="POST">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
             </div>
         {% endfor %}
     </div>

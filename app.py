@@ -1,5 +1,5 @@
 from datetime import datetime
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 from sqlalchemy import create_engine, Column, Integer, Date, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
@@ -72,6 +72,16 @@ def tasks():
     tasks = session.query(Task).order_by(Task.date.desc()).all()
     session.close()
     return render_template('tasks.html', tasks=tasks)
+
+
+@app.route('/tasks/delete/<int:id>', methods=['POST'])
+def delete_tasks(id):
+    session = Session()
+    if request.method == 'POST':
+        task = session.query(Task).get(id)
+        session.delete(task)
+        session.commit()
+    return redirect(url_for('tasks'))
 
 
 if __name__ == '__main__':
