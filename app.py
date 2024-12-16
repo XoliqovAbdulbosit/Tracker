@@ -52,10 +52,20 @@ def finances():
         if data.get(transaction.date, None) is None:
             data[transaction.date] = []
             daily[transaction.date] = 0
-        data[transaction.date].append([transaction.amount, transaction.description])
+        data[transaction.date].append([transaction.amount, transaction.description, transaction.id])
         daily[transaction.date] += transaction.amount
     session.close()
     return render_template('finances.html', data=data, daily=daily)
+
+
+@app.route('/finances/delete/<int:id>', methods=['POST'])
+def delete_finances(id):
+    session = Session()
+    if request.method == 'POST':
+        transaction = session.query(Transaction).get(id)
+        session.delete(transaction)
+        session.commit()
+    return redirect(url_for('finances'))
 
 
 @app.route('/tasks', methods=['GET', 'POST'])

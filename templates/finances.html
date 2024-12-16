@@ -21,6 +21,9 @@
                         <p class="d-inline fs-5 text-danger">{{ value.0 }}</p>
                     {% endif %}
                     <p class="d-inline fs-5">{{ value.1 }}</p><br>
+                    <form action="/finances/delete/{{ values.2 }}" method="POST">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
                 {% endfor %}
                 {% if daily[key] > 0 %}
                     <p class="d-inline fs-5 text-success">+{{ daily[key] }}</p>
